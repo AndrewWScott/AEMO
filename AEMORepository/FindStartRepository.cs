@@ -5,9 +5,9 @@
 
     public class FindStartRepository : IFindStartContract
     {
-        public int FindStart(MatchModel match)
+        public int FindStart(MatchModel match, string matchingText)
         {
-            return match.MatchingText.IndexOf(match.SubText, match.IsCaseInsensitive ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
+            return matchingText.IndexOf(match.SubText, match.IsCaseInsensitive ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
         }
     }
 }

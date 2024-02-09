@@ -12,9 +12,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IMatchContract, MatchRepository>();
+builder.Services.AddScoped<IContainsContract, ContainsRepository>();
 builder.Services.AddScoped<IFindStartContract, FindStartRepository>();
-builder.Services.AddScoped<IMatchRContract, MatchRecursivlyRepository>();
+builder.Services.AddScoped<IMatchContract, MatchRepository>();
 
 var app = builder.Build();
 

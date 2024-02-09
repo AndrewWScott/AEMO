@@ -17,27 +17,27 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace AEMOTests
 {
     [TestClass]
-    public class FindStartTest
+    public class ContainsTest
     {
         IServiceCollection services = new ServiceCollection();
-        public FindStartTest() 
+        public ContainsTest() 
         {            
-            services.AddScoped<IFindStartContract, FindStartRepository>();
+            services.AddScoped<IContainsContract, ContainsRepository>();
         }
 
         [TestMethod]
-        public void FindStart()
+        public void Contains()
         {
             using (ServiceProvider serviceProvider = services.BuildServiceProvider())
             {
-                var FindStartService = serviceProvider.GetRequiredService<IFindStartContract>();
+                var matchService = serviceProvider.GetRequiredService<IContainsContract>();
 
                 string Text = "Andrew Scott ANC ANSO ANNW akndo wiks";
                 MatchModel _MatchCSMM = new MatchModel { Text = Text, SubText = "a", IsCaseInsensitive = true, HasMultipleMatches = true };
-                MatchModel _NoMatchCSMM = new MatchModel { Text = Text, SubText = "z", IsCaseInsensitive = true, HasMultipleMatches = true };
+                MatchModel _NoMatchCSMM = new MatchModel { Text = Text, SubText = "z", IsCaseInsensitive = true, HasMultipleMatches = true};
 
-                MatchModel _MatchNCSMM = new MatchModel { Text = Text, SubText = "a", IsCaseInsensitive = false, HasMultipleMatches = true };
-                MatchModel _NoMatchNCSMM = new MatchModel { Text = Text, SubText = "z", IsCaseInsensitive = false, HasMultipleMatches = true };
+                MatchModel _MatchNCSMM = new MatchModel { Text = Text, SubText = "a", IsCaseInsensitive = false, HasMultipleMatches = false };
+                MatchModel _NoMatchNCSMM = new MatchModel { Text = Text, SubText = "z", IsCaseInsensitive = false, HasMultipleMatches = false };
 
                 MatchModel _MatchCSSM = new MatchModel { Text = Text, SubText = "a", IsCaseInsensitive = false, HasMultipleMatches = false };
                 MatchModel _NoMatchCSSM = new MatchModel { Text = Text, SubText = "z", IsCaseInsensitive = false, HasMultipleMatches = false };
@@ -45,17 +45,17 @@ namespace AEMOTests
                 MatchModel _MatchNCSSM = new MatchModel { Text = Text, SubText = "a", IsCaseInsensitive = false, HasMultipleMatches = false };
                 MatchModel _NoMatchNCSSM = new MatchModel { Text = Text, SubText = "z", IsCaseInsensitive = false, HasMultipleMatches = false };
 
-                Assert.AreEqual(FindStartService.FindStart(_MatchCSMM, _MatchCSMM.Text), 0);
-                Assert.AreEqual(FindStartService.FindStart(_NoMatchCSMM, _NoMatchCSMM.Text), -1);
+                Assert.IsTrue(matchService.Contains(_MatchCSMM, _MatchCSMM.Text));
+                Assert.IsFalse(matchService.Contains(_NoMatchCSMM, _NoMatchCSMM.Text));
 
-                Assert.AreEqual(FindStartService.FindStart(_MatchNCSMM, _MatchNCSMM.Text), 27);
-                Assert.AreEqual(FindStartService.FindStart(_NoMatchNCSMM, _NoMatchNCSMM.Text), -1);
+                Assert.IsTrue(matchService.Contains(_MatchNCSMM, _MatchNCSMM.Text));
+                Assert.IsFalse(matchService.Contains(_NoMatchNCSMM, _NoMatchNCSMM.Text));
 
-                Assert.AreEqual(FindStartService.FindStart(_MatchCSSM, _MatchCSSM.Text), 27);
-                Assert.AreEqual(FindStartService.FindStart(_NoMatchCSSM, _NoMatchCSSM.Text), -1);
+                Assert.IsTrue(matchService.Contains(_MatchCSSM, _MatchCSSM.Text));
+                Assert.IsFalse(matchService.Contains(_NoMatchCSSM, _NoMatchCSSM.Text));
 
-                Assert.AreEqual(FindStartService.FindStart(_MatchNCSSM, _MatchNCSSM.Text), 27);
-                Assert.AreEqual(FindStartService.FindStart(_NoMatchNCSSM, _NoMatchNCSSM.Text), -1);
+                Assert.IsTrue(matchService.Contains(_MatchNCSSM, _MatchNCSSM.Text));
+                Assert.IsFalse(matchService.Contains(_NoMatchNCSSM, _NoMatchNCSSM.Text));
             }            
         }
     }

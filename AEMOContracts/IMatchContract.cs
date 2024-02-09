@@ -1,9 +1,10 @@
 ﻿namespace AEMOContracts
 {
+    using AEMOEntities;
     using AEMOEntities.Models;
 
     public interface IMatchContract
     {
-        public bool Match(MatchModel match);
+        public MatchTextModel? Match(MatchModel match);
     }
 }

@@ -11,32 +11,18 @@ namespace AEMO.Controllers
     public class MatchController : ControllerBase
     {
 #pragma warning disable SA1309 // Field names should not begin with underscore
-        private readonly IMatchRContract _matchR;
+        private readonly IMatchContract _matchR;
 #pragma warning restore SA1309 // Field names should not begin with underscore
 
-        public MatchController(IMatchRContract matchR)
+        public MatchController(IMatchContract matchR)
         {
             this._matchR = matchR;
         }
 
         [HttpGet(Name = "GetMatch")]
-        public MatchTextModel? GetMatch(string text, string subText, bool HasMultipleMatches, bool caseInsensitive)
+        public MatchTextModel? GetMatch([FromQuery] MatchModel match)
         {
-            if (string.IsNullOrEmpty(text) || string.IsNullOrEmpty(subText))
-            {
-                return null;
-            }
-
-            var matchText = new MatchTextModel
-            {
-                StartOfSubtext = new List<int>(),
-            };
-
-            var match = new MatchModel { Text = text, SubText = subText, HasMultipleMatches = HasMultipleMatches, IsCaseInsensitive = caseInsensitive, MatchingText = text };
-
-            this._matchR.MatchRecursivly(match, matchText);
-
-            return matchText;
+            return this._matchR.Match(match);
         }
     }
 }

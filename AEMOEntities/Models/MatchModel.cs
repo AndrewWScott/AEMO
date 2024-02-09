@@ -9,7 +9,5 @@
         public bool IsCaseInsensitive { get; set; }
 
         public bool HasMultipleMatches { get; set; }
-
-        public string? MatchingText { get; set; }
     }
 }
