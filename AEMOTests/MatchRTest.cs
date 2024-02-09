@@ -38,17 +38,17 @@ namespace AEMOTests
                 var matchService = serviceProvider.GetRequiredService<IMatchRContract>();
 
                 string Text = "Andrew Scott ANC ANSO ANNW akndo wiks";
-                MatchModel _MatchCSMM = new MatchModel { Text = Text, SubText = "a", IsCaseInsensitive = true, MultipleMatches = true, MatchingText = Text };
-                MatchModel _NoMatchCSMM = new MatchModel { Text = Text, SubText = "z", IsCaseInsensitive = true, MultipleMatches = true, MatchingText = Text };
+                MatchModel _MatchCSMM = new MatchModel { Text = Text, SubText = "a", IsCaseInsensitive = true, HasMultipleMatches = true, MatchingText = Text };
+                MatchModel _NoMatchCSMM = new MatchModel { Text = Text, SubText = "z", IsCaseInsensitive = true, HasMultipleMatches = true, MatchingText = Text };
 
-                MatchModel _MatchNCSMM = new MatchModel { Text = Text, SubText = "a", IsCaseInsensitive = false, MultipleMatches = true, MatchingText = Text };
-                MatchModel _NoMatchNCSMM = new MatchModel { Text = Text, SubText = "z", IsCaseInsensitive = false, MultipleMatches = true, MatchingText = Text };
+                MatchModel _MatchNCSMM = new MatchModel { Text = Text, SubText = "a", IsCaseInsensitive = false, HasMultipleMatches = true, MatchingText = Text };
+                MatchModel _NoMatchNCSMM = new MatchModel { Text = Text, SubText = "z", IsCaseInsensitive = false, HasMultipleMatches = true, MatchingText = Text };
 
-                MatchModel _MatchCSSM = new MatchModel { Text = Text, SubText = "a", IsCaseInsensitive = true, MultipleMatches = false, MatchingText = Text };
-                MatchModel _NoMatchCSSM = new MatchModel { Text = Text, SubText = "z", IsCaseInsensitive = true, MultipleMatches = false, MatchingText = Text };
+                MatchModel _MatchCSSM = new MatchModel { Text = Text, SubText = "a", IsCaseInsensitive = true, HasMultipleMatches = false, MatchingText = Text };
+                MatchModel _NoMatchCSSM = new MatchModel { Text = Text, SubText = "z", IsCaseInsensitive = true, HasMultipleMatches = false, MatchingText = Text };
 
-                MatchModel _MatchNCSSM = new MatchModel { Text = Text, SubText = "a", IsCaseInsensitive = false, MultipleMatches = false, MatchingText = Text };
-                MatchModel _NoMatchNCSSM = new MatchModel { Text = Text, SubText = "z", IsCaseInsensitive = false, MultipleMatches = false, MatchingText = Text };
+                MatchModel _MatchNCSSM = new MatchModel { Text = Text, SubText = "a", IsCaseInsensitive = false, HasMultipleMatches = false, MatchingText = Text };
+                MatchModel _NoMatchNCSSM = new MatchModel { Text = Text, SubText = "z", IsCaseInsensitive = false, HasMultipleMatches = false, MatchingText = Text };
 
                 matchService.MatchRecursivly(_MatchNCSMM, new MatchTextModel
                 {

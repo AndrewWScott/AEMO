@@ -43,7 +43,7 @@
             match.MatchingText = match?.Text?.Substring(matchText.StartOfSubtext.LastOrDefault());
 
             // stop if single match or MatchingText is Empty
-            if (!match.MultipleMatches || string.IsNullOrEmpty(match.MatchingText))
+            if (!match.HasMultipleMatches || string.IsNullOrEmpty(match.MatchingText))
             {
                 return matchText;
             }

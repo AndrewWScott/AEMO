@@ -20,7 +20,7 @@ namespace AEMO.Controllers
         }
 
         [HttpGet(Name = "GetMatch")]
-        public MatchTextModel? GetMatch(string text, string subText, bool multipleMatches, bool caseInsensitive)
+        public MatchTextModel? GetMatch(string text, string subText, bool HasMultipleMatches, bool caseInsensitive)
         {
             if (string.IsNullOrEmpty(text) || string.IsNullOrEmpty(subText))
             {
@@ -32,7 +32,7 @@ namespace AEMO.Controllers
                 StartOfSubtext = new List<int>(),
             };
 
-            var match = new MatchModel { Text = text, SubText = subText, MultipleMatches = multipleMatches, IsCaseInsensitive = caseInsensitive, MatchingText = text };
+            var match = new MatchModel { Text = text, SubText = subText, HasMultipleMatches = HasMultipleMatches, IsCaseInsensitive = caseInsensitive, MatchingText = text };
 
             this._matchR.MatchRecursivly(match, matchText);
 
