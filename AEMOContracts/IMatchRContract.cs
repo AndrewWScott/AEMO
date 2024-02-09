@@ -1,9 +1,10 @@
 ﻿namespace AEMOContracts
 {
     using AEMOEntities;
+    using AEMOEntities.Models;
 
     public interface IMatchRContract
     {
-        public MatchTextModel? MatchRecursivly(string text, string subText, bool caseInsensitive, bool multipleMatches, MatchTextModel matchText, string initalText);
+        public MatchTextModel? MatchRecursivly(MatchModel match, MatchTextModel matxhText);
     }
 }

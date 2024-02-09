@@ -2,6 +2,7 @@
 {
     using AEMOContracts;
     using AEMOEntities;
+    using AEMOEntities.Models;
 
     public class MatchR : IMatchRContract
     {
@@ -16,16 +17,21 @@
             this._findStart = findStart;
         }
 
-        public MatchTextModel? MatchRecursivly(string text, string subText, bool caseInsensitive, bool multipleMatches, MatchTextModel matchText, string initalText)
+        public MatchTextModel? MatchRecursivly(MatchModel? match, MatchTextModel? matchText)
         {
-            if (!this._match.Match(text, subText, caseInsensitive))
+            if (match is null || matchText is null)
+            {
+                return null;
+            }
+
+            if (!this._match.Match(match))
             {
                 return matchText;
             }
 
             matchText.Match = true;
 
-            int positionOf = this._findStart.FindStart(text, subText, caseInsensitive);
+            int positionOf = this._findStart.FindStart(match);
 
             // increment for a 1 starting number
             positionOf++;
@@ -33,16 +39,16 @@
             // add found position to list
             matchText?.StartOfSubtext?.Add(positionOf + matchText.StartOfSubtext.LastOrDefault());
 
-            // stop if single match
-            if (!multipleMatches)
+            // get next string to search for
+            match.MatchingText = match?.Text?.Substring(matchText.StartOfSubtext.LastOrDefault());
+
+            // stop if single match or MatchingText is Empty
+            if (!match.MultipleMatches || string.IsNullOrEmpty(match.MatchingText))
             {
                 return matchText;
             }
 
-            // get next string to search for
-            text = initalText.Substring((int)matchText?.StartOfSubtext?.LastOrDefault());
-
-            this.MatchRecursivly(text, subText, caseInsensitive, multipleMatches, matchText, initalText);
+            this.MatchRecursivly(match, matchText);
 
             return matchText;
         }

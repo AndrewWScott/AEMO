@@ -1,12 +1,13 @@
 ﻿namespace AEMORepository
 {
     using AEMOContracts;
+    using AEMOEntities.Models;
 
     public class FindStartRepository : IFindStartContract
     {
-        public int FindStart(string text, string subText, bool caseInsensitive)
+        public int FindStart(MatchModel match)
         {
-            return text.IndexOf(subText, caseInsensitive ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
+            return match.MatchingText.IndexOf(match.SubText, match.IsCaseInsensitive ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
         }
     }
 }

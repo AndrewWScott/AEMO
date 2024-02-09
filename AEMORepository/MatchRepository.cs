@@ -1,10 +1,12 @@
-﻿namespace AEMORepository
+﻿using AEMOEntities.Models;
+
+namespace AEMORepository
 {
     public class MatchRepository : AEMOContracts.IMatchContract
     {
-        public bool Match(string text, string subText, bool caseInsensitive)
+        public bool Match(MatchModel match)
         {
-            return text.Contains(subText, caseInsensitive ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
+            return match.MatchingText.Contains(match.SubText, match.IsCaseInsensitive ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
         }
     }
 }

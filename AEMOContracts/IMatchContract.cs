@@ -1,7 +1,9 @@
-﻿namespace AEMOContracts
+﻿using AEMOEntities.Models;
+
+namespace AEMOContracts
 {
     public interface IMatchContract
     {
-        public bool Match(string text, string subText, bool caseInsensitive);
+        public bool Match(MatchModel match);
     }
 }
