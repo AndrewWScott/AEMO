@@ -6,10 +6,10 @@
 
     public class MatchR : IMatchRContract
     {
-#pragma warning disable SA1309 // Field names should not begin with underscore
         private readonly IMatchContract _match;
-#pragma warning restore SA1309 // Field names should not begin with underscore
+#pragma warning disable SA1309 // Field names should not begin with underscore
         private readonly IFindStartContract _findStart;
+#pragma warning restore SA1309 // Field names should not begin with underscore
 
         public MatchR(IMatchContract matchContract, IFindStartContract findStart)
         {

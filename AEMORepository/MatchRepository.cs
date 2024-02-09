@@ -1,7 +1,7 @@
-﻿using AEMOEntities.Models;
-
-namespace AEMORepository
+﻿namespace AEMORepository
 {
+    using AEMOEntities.Models;
+
     public class MatchRepository : AEMOContracts.IMatchContract
     {
         public bool Match(MatchModel match)

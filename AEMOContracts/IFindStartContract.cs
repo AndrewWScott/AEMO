@@ -1,7 +1,7 @@
-﻿using AEMOEntities.Models;
-
-namespace AEMOContracts
+﻿namespace AEMOContracts
 {
+    using AEMOEntities.Models;
+
     public interface IFindStartContract
     {
         public int FindStart(MatchModel match);
