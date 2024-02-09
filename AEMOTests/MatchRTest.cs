@@ -24,7 +24,7 @@ namespace AEMOTests
         IServiceCollection services = new ServiceCollection();
         public MatchRTest() 
         {            
-            services.AddScoped<IMatchRContract, MatchR>();
+            services.AddScoped<IMatchRContract, MatchRecursivlyRepository>();
             services.AddScoped<IMatchContract, MatchRepository>();
             services.AddScoped<IFindStartContract, FindStartRepository>();
         }

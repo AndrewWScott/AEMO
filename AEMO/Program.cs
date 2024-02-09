@@ -14,7 +14,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IMatchContract, MatchRepository>();
 builder.Services.AddScoped<IFindStartContract, FindStartRepository>();
-builder.Services.AddScoped<IMatchRContract, MatchR>();
+builder.Services.AddScoped<IMatchRContract, MatchRecursivlyRepository>();
 
 var app = builder.Build();
 

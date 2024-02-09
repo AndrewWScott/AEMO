@@ -4,14 +4,14 @@
     using AEMOEntities;
     using AEMOEntities.Models;
 
-    public class MatchR : IMatchRContract
+    public class MatchRecursivlyRepository : IMatchRContract
     {
         private readonly IMatchContract _match;
 #pragma warning disable SA1309 // Field names should not begin with underscore
         private readonly IFindStartContract _findStart;
 #pragma warning restore SA1309 // Field names should not begin with underscore
 
-        public MatchR(IMatchContract matchContract, IFindStartContract findStart)
+        public MatchRecursivlyRepository(IMatchContract matchContract, IFindStartContract findStart)
         {
             this._match = matchContract;
             this._findStart = findStart;
