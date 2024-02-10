@@ -1,62 +1,53 @@
-using AEMO.Controllers;
-using AEMOContracts;
-using AEMOEntities;
-using AEMOEntities.Models;
-using AEMORepository;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.Extensions.DependencyInjection;
-using Moq;
-using Xunit.Sdk;
-using static System.Net.Mime.MediaTypeNames;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
 namespace AEMOTests
 {
+    using AEMOContracts;
+    using AEMOEntities.Models;
+    using AEMORepository;
+    using Microsoft.Extensions.DependencyInjection;
+    using Xunit.Sdk;
+
     [TestClass]
     public class ContainsTest
     {
-        IServiceCollection services = new ServiceCollection();
-        public ContainsTest() 
-        {            
-            services.AddScoped<IContainsContract, ContainsRepository>();
+        private readonly IServiceCollection services = new ServiceCollection();
+
+        public ContainsTest()
+        {
+            this.services.AddScoped<IContainsContract, ContainsRepository>();
         }
 
         [TestMethod]
         public void Contains()
         {
-            using (ServiceProvider serviceProvider = services.BuildServiceProvider())
+            using (ServiceProvider serviceProvider = this.services.BuildServiceProvider())
             {
-                var matchService = serviceProvider.GetRequiredService<IContainsContract>();
+                var containsService = serviceProvider.GetRequiredService<IContainsContract>();
 
-                string Text = "Andrew Scott ANC ANSO ANNW akndo wiks";
-                MatchModel _MatchCSMM = new MatchModel { Text = Text, SubText = "a", IsCaseInsensitive = true, HasMultipleMatches = true };
-                MatchModel _NoMatchCSMM = new MatchModel { Text = Text, SubText = "z", IsCaseInsensitive = true, HasMultipleMatches = true};
+                string text = "Andrew Scott ANC ANSO ANNW akndo wiks";
+                MatchModel matchCSMM = new MatchModel { Text = text, SubText = "a", IsCaseInsensitive = true, HasMultipleMatches = true };
+                MatchModel noMatchCSMM = new MatchModel { Text = text, SubText = "z", IsCaseInsensitive = true, HasMultipleMatches = true };
 
-                MatchModel _MatchNCSMM = new MatchModel { Text = Text, SubText = "a", IsCaseInsensitive = false, HasMultipleMatches = false };
-                MatchModel _NoMatchNCSMM = new MatchModel { Text = Text, SubText = "z", IsCaseInsensitive = false, HasMultipleMatches = false };
+                MatchModel matchNCSMM = new MatchModel { Text = text, SubText = "a", IsCaseInsensitive = false, HasMultipleMatches = true };
+                MatchModel noMatchNCSMM = new MatchModel { Text = text, SubText = "z", IsCaseInsensitive = false, HasMultipleMatches = true };
 
-                MatchModel _MatchCSSM = new MatchModel { Text = Text, SubText = "a", IsCaseInsensitive = false, HasMultipleMatches = false };
-                MatchModel _NoMatchCSSM = new MatchModel { Text = Text, SubText = "z", IsCaseInsensitive = false, HasMultipleMatches = false };
+                MatchModel matchCSSM = new MatchModel { Text = text, SubText = "a", IsCaseInsensitive = false, HasMultipleMatches = false };
+                MatchModel noMatchCSSM = new MatchModel { Text = text, SubText = "z", IsCaseInsensitive = false, HasMultipleMatches = false };
 
-                MatchModel _MatchNCSSM = new MatchModel { Text = Text, SubText = "a", IsCaseInsensitive = false, HasMultipleMatches = false };
-                MatchModel _NoMatchNCSSM = new MatchModel { Text = Text, SubText = "z", IsCaseInsensitive = false, HasMultipleMatches = false };
+                MatchModel matchNCSSM = new MatchModel { Text = text, SubText = "a", IsCaseInsensitive = false, HasMultipleMatches = false };
+                MatchModel noMatchNCSSM = new MatchModel { Text = text, SubText = "z", IsCaseInsensitive = false, HasMultipleMatches = false };
 
-                Assert.IsTrue(matchService.Contains(_MatchCSMM, _MatchCSMM.Text));
-                Assert.IsFalse(matchService.Contains(_NoMatchCSMM, _NoMatchCSMM.Text));
+                Assert.IsTrue(containsService.Contains(matchCSMM, matchCSMM.Text));
+                Assert.IsFalse(containsService.Contains(noMatchCSMM, noMatchCSMM.Text));
 
-                Assert.IsTrue(matchService.Contains(_MatchNCSMM, _MatchNCSMM.Text));
-                Assert.IsFalse(matchService.Contains(_NoMatchNCSMM, _NoMatchNCSMM.Text));
+                Assert.IsTrue(containsService.Contains(matchNCSMM, matchNCSMM.Text));
+                Assert.IsFalse(containsService.Contains(noMatchNCSMM, noMatchNCSMM.Text));
 
-                Assert.IsTrue(matchService.Contains(_MatchCSSM, _MatchCSSM.Text));
-                Assert.IsFalse(matchService.Contains(_NoMatchCSSM, _NoMatchCSSM.Text));
+                Assert.IsTrue(containsService.Contains(matchCSSM, matchCSSM.Text));
+                Assert.IsFalse(containsService.Contains(noMatchCSSM, noMatchCSSM.Text));
 
-                Assert.IsTrue(matchService.Contains(_MatchNCSSM, _MatchNCSSM.Text));
-                Assert.IsFalse(matchService.Contains(_NoMatchNCSSM, _NoMatchNCSSM.Text));
-            }            
+                Assert.IsTrue(containsService.Contains(matchNCSSM, matchNCSSM.Text));
+                Assert.IsFalse(containsService.Contains(noMatchNCSSM, noMatchNCSSM.Text));
+            }
         }
     }
 }

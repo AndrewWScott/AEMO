@@ -17,7 +17,7 @@
             this._findStart = findStart;
         }
 
-        public MatchTextModel? Match(MatchModel match)
+        public MatchTextModel Match(MatchModel match)
         {
             var matchText = new MatchTextModel
             {
