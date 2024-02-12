@@ -1,0 +1,1 @@
+﻿Check speed of using char array in MatchRepository

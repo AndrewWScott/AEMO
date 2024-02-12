@@ -1,0 +1,1 @@
+﻿remove double negative from IsCaseInsensitive
